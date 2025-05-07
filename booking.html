@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Tickets - TicketHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>TicketHub</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="booking.html" class="active">My Bookings</a></li>
+                <li><a href="#" id="login-btn">Login / Register</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2 id="booking-page-title">Book Tickets</h2>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a> / <span id="booking-breadcrumb">Book Tickets</span>
+                </div>
+            </div>
+        </section>
+
+        <div class="booking-container">
+            <div class="container">
+                <div class="booking-tabs">
+                    <button class="booking-tab active" data-tab="new-booking">Book Tickets</button>
+                    <button class="booking-tab" data-tab="my-bookings">My Bookings</button>
+                </div>
+
+                <div class="booking-content">
+                    <!-- New Booking Tab -->
+                    <div class="booking-tab-content active" id="new-booking-content">
+                        <div class="booking-steps">
+                            <div class="step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-text">Event Details</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-text">Select Seats</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-text">Customer Info</div>
+                            </div>
+                            <div class="step" data-step="4">
+                                <div class="step-number">4</div>
+                                <div class="step-text">Payment</div>
+                            </div>
+                            <div class="step" data-step="5">
+                                <div class="step-number">5</div>
+                                <div class="step-text">Confirmation</div>
+                            </div>
+                        </div>
+
+                        <div class="booking-step-content active" id="step-1-content">
+                            <div class="event-details-container" id="event-details-container">
+                                <!-- If coming from event page, show event details -->
+                                <div id="selected-event-details">
+                                    <div class="no-event-selected">
+                                        <p>No event selected. Please select an event from the list below or go to the <a href="events.html">Events page</a>.</p>
+                                    </div>
+                                </div>
+
+                                <h3>Popular Events</h3>
+                                <div class="events-grid small-grid" id="popular-events">
+                                    <!-- Popular events will be populated by JavaScript -->
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="btn-primary next-step" data-next="2" disabled>Continue to Select Seats</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-step-content" id="step-2-content">
+                            <div class="seat-selection-container">
+                                <div class="seat-map-container">
+                                    <h3>Select Your Seats</h3>
+                                    <div class="seat-categories">
+                                        <div class="seat-category">
+                                            <div class="seat-sample premium"></div>
+                                            <span>Premium ($150)</span>
+                                        </div>
+                                        <div class="seat-category">
+                                            <div class="seat-sample standard"></div>
+                                            <span>Standard ($100)</span>
+                                        </div>
+                                        <div class="seat-category">
+                                            <div class="seat-sample economy"></div>
+                                            <span>Economy ($75)</span>
+                                        </div>
+                                        <div class="seat-category">
+                                            <div class="seat-sample selected"></div>
+                                            <span>Selected</span>
+                                        </div>
+                                        <div class="seat-category">
+                                            <div class="seat-sample unavailable"></div>
+                                            <span>Unavailable</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="stage">
+                                        <div class="stage-label">STAGE</div>
+                                    </div>
+                                    
+                                    <div class="seat-map" id="seat-map">
+                                        <!-- Seat map will be populated by JavaScript -->
+                                    </div>
+                                </div>
+                                
+                                <div class="selected-seats-summary">
+                                    <h3>Selected Seats</h3>
+                                    <div id="selected-seats-list">
+                                        <p>No seats selected</p>
+                                    </div>
+                                    <div class="seat-selection-total">
+                                        <div class="total-label">Total:</div>
+                                        <div class="total-amount" id="seat-selection-total-amount">$0.00</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="btn-secondary prev-step" data-prev="1">Back</button>
+                                <button class="btn-primary next-step" data-next="3" disabled>Continue to Customer Info</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-step-content" id="step-3-content">
+                            <div class="customer-info-container">
+                                <h3>Customer Information</h3>
+                                <form id="customer-info-form">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="customer-name">Full Name</label>
+                                            <input type="text" id="customer-name" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customer-email">Email</label>
+                                            <input type="email" id="customer-email" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="customer-phone">Phone Number</label>
+                                            <input type="tel" id="customer-phone" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="customer-address">Address</label>
+                                            <input type="text" id="customer-address" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="special-requests">Special Requests (Optional)</label>
+                                        <textarea id="special-requests" rows="3"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="step-actions">
+                                <button class="btn-secondary prev-step" data-prev="2">Back</button>
+                                <button class="btn-primary next-step" data-next="4">Continue to Payment</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-step-content" id="step-4-content">
+                            <div class="payment-container">
+                                <h3>Payment Information</h3>
+                                <div class="payment-summary">
+                                    <h4>Order Summary</h4>
+                                    <div class="summary-item">
+                                        <span>Event:</span>
+                                        <span id="summary-event-name">Event Name</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Date & Time:</span>
+                                        <span id="summary-event-datetime">Date and Time</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Seats:</span>
+                                        <span id="summary-seats">Selected Seats</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Subtotal:</span>
+                                        <span id="summary-subtotal">$0.00</span>
+                                    </div>
+                                    <div class="summary-item">
+                                        <span>Service Fee:</span>
+                                        <span id="summary-fee">$0.00</span>
+                                    </div>
+                                    <div class="summary-item total">
+                                        <span>Total:</span>
+                                        <span id="summary-total">$0.00</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-methods">
+                                    <h4>Payment Method</h4>
+                                    <div class="payment-method-tabs">
+                                        <button class="payment-method-tab active" data-method="card">Credit Card</button>
+                                        <button class="payment-method-tab" data-method="paypal">PayPal</button>
+                                    </div>
+                                    
+                                    <div class="payment-method-content active" id="card-payment">
+                                        <form id="card-payment-form">
+                                            <div class="form-group">
+                                                <label for="card-name">Name on Card</label>
+                                                <input type="text" id="card-name" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="card-number">Card Number</label>
+                                                <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" required>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="card-expiry">Expiry Date</label>
+                                                    <input type="text" id="card-expiry" placeholder="MM/YY" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="card-cvv">CVV</label>
+                                                    <input type="text" id="card-cvv" placeholder="XXX" required>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    
+                                    <div class="payment-method-content" id="paypal-payment">
+                                        <div class="paypal-info">
+                                            <p>You will be redirected to PayPal to complete your payment.</p>
+                                            <div class="paypal-logo">
+                                                <i class="fab fa-paypal"></i> PayPal
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-actions">
+                                <button class="btn-secondary prev-step" data-prev="3">Back</button>
+                                <button class="btn-primary next-step" data-next="5">Complete Payment</button>
+                            </div>
+                        </div>
+
+                        <div class="booking-step-content" id="step-5-content">
+                            <div class="confirmation-container">
+                                <div class="confirmation-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h3>Booking Confirmed!</h3>
+                                <p>Your booking has been successfully completed.</p>
+                                <div class="booking-details" id="confirmation-details">
+                                    <!-- Booking details will be populated by JavaScript -->
+                                </div>
+                                <div class="booking-reference">
+                                    <p>Booking Reference: <span id="booking-reference">TH-XXXXXXXX</span></p>
+                                </div>
+                                <div class="confirmation-actions">
+                                    <button class="btn-secondary" id="download-tickets">
+                                        <i class="fas fa-download"></i> Download Tickets
+                                    </button>
+                                    <button class="btn-primary" id="view-bookings">
+                                        <i class="fas fa-ticket-alt"></i> View My Bookings
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- My Bookings Tab -->
+                    <div class="booking-tab-content" id="my-bookings-content">
+                        <div class="my-bookings-container">
+                            <div class="my-bookings-header">
+                                <h3>My Bookings</h3>
+                                <div class="bookings-filter">
+                                    <label for="bookings-filter">Show:</label>
+                                    <select id="bookings-filter">
+                                        <option value="all">All Bookings</option>
+                                        <option value="upcoming">Upcoming</option>
+                                        <option value="past">Past</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="bookings-list" id="bookings-list">
+                                <!-- If not logged in -->
+                                <div class="login-prompt" id="bookings-login-prompt">
+                                    <p>Please <a href="#" id="login-prompt-btn">login</a> to view your bookings.</p>
+                                </div>
+                                
+                                <!-- If logged in but no bookings -->
+                                <div class="no-bookings" id="no-bookings" style="display: none;">
+                                    <p>You don't have any bookings yet.</p>
+                                    <a href="events.html" class="btn-primary">Browse Events</a>
+                                </div>
+                                
+                                <!-- Bookings will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="faq-section">
+            <div class="container">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>How do I receive my tickets?</h4>
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>After completing your booking, you will receive an email with your e-tickets attached. You can also download your tickets from the "My Bookings" section of your account.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Can I cancel or change my booking?</h4>
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Cancellation and change policies vary by event. Generally, you can cancel your booking up to 48 hours before the event for a full refund. To make changes, please contact our customer support team.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>Are there any additional fees?</h4>
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, a service fee is applied to all bookings. This fee covers the cost of processing your payment and delivering your tickets. The fee amount is displayed during the checkout process before you complete your payment.</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h4>What payment methods do you accept?</h4>
+                            <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We accept all major credit cards (Visa, Mastercard, American Express) and PayPal. All payments are processed securely.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>TicketHub</h4>
+                    <p>Your one-stop destination for booking tickets to all your favorite events.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="booking.html">My Bookings</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Event Street, New York, NY</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@tickethub.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TicketHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="login-tab">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="register-tab">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - TicketHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>TicketHub</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="booking.html">My Bookings</a></li>
+                <li><a href="#" id="login-btn">Login / Register</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>Browse Events</h2>
+                <div class="breadcrumb">
+                    <a href="index.html">Home</a> / <span>Events</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-search">
+            <div class="container">
+                <div class="search-filters">
+                    <div class="filter-toggle">
+                        <button id="filter-toggle-btn">
+                            <i class="fas fa-filter"></i> Filters
+                        </button>
+                    </div>
+                    <div class="filters-container" id="filters-container">
+                        <form id="filters-form">
+                            <div class="filter-group">
+                                <h4>Event Type</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="event-type" value="concert"> Concerts
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="event-type" value="movie"> Movies
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="event-type" value="theater"> Theater
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="event-type" value="sports"> Sports
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <h4>Location</h4>
+                                <div class="checkbox-group">
+                                    <label>
+                                        <input type="checkbox" name="location" value="new-york"> New York
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="location" value="los-angeles"> Los Angeles
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="location" value="chicago"> Chicago
+                                    </label>
+                                    <label>
+                                        <input type="checkbox" name="location" value="miami"> Miami
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <h4>Date Range</h4>
+                                <div class="date-range">
+                                    <div class="form-group">
+                                        <label for="date-from">From</label>
+                                        <input type="date" id="date-from" name="date-from">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date-to">To</label>
+                                        <input type="date" id="date-to" name="date-to">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-group">
+                                <h4>Price Range</h4>
+                                <div class="price-range">
+                                    <div class="range-slider">
+                                        <input type="range" id="price-min" min="0" max="500" value="0">
+                                        <input type="range" id="price-max" min="0" max="500" value="500">
+                                    </div>
+                                    <div class="range-values">
+                                        <span id="price-min-value">$0</span> - <span id="price-max-value">$500</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-actions">
+                                <button type="submit" class="btn-primary">Apply Filters</button>
+                                <button type="reset" class="btn-secondary">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="search-container">
+                        <form id="search-form">
+                            <div class="search-input">
+                                <input type="text" placeholder="Search events..." id="search-query">
+                                <button type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="events-list-section">
+            <div class="container">
+                <div class="events-header">
+                    <div class="events-count">
+                        <span id="events-count">0</span> events found
+                    </div>
+                    <div class="events-sort">
+                        <label for="sort-by">Sort by:</label>
+                        <select id="sort-by">
+                            <option value="date-asc">Date (Earliest first)</option>
+                            <option value="date-desc">Date (Latest first)</option>
+                            <option value="price-asc">Price (Low to High)</option>
+                            <option value="price-desc">Price (High to Low)</option>
+                            <option value="name-asc">Name (A-Z)</option>
+                            <option value="name-desc">Name (Z-A)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="events-grid" id="events-grid">
+                    <!-- Events will be populated by JavaScript -->
+                </div>
+                <div class="pagination" id="pagination">
+                    <!-- Pagination will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div class="container">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter to get updates on new events and exclusive offers</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>TicketHub</h4>
+                    <p>Your one-stop destination for booking tickets to all your favorite events.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="booking.html">My Bookings</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Event Street, New York, NY</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@tickethub.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TicketHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="login">Login</button>
+                <button class="tab-btn" data-tab="register">Register</button>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="login-tab">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary">Login</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane" id="register-tab">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Quick View Modal -->
+    <div class="modal" id="event-modal">
+        <div class="modal-content event-modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="event-modal-details" id="event-modal-details">
+                <!-- Event details will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
